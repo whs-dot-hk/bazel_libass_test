@@ -1,0 +1,36 @@
+load("@rules_foreign_cc//tools/build_defs:configure.bzl", "configure_make")
+
+filegroup(
+  name = "all",
+  srcs = glob(["**"]),
+)
+
+configure_make(
+  name = "library",
+  configure_env_vars = {
+    "FREETYPE_CFLAGS": "-I$EXT_BUILD_DEPS/library/include/freetype2",
+    "FREETYPE_LIBS": "-L$EXT_BUILD_DEPS/library/lib -lfreetype",
+    "FRIBIDI_CFLAGS": "-I$EXT_BUILD_DEPS/library/include/fribidi",
+    "FRIBIDI_LIBS": "-L$EXT_BUILD_DEPS/library/lib -lfribidi",
+    "FONTCONFIG_CFLAGS": "-I$EXT_BUILD_DEPS/library/include",
+    "FONTCONFIG_LIBS": "-L$EXT_BUILD_DEPS/library/lib -lfontconfig",
+  },
+  configure_options = [
+    "--enable-shared=no",
+  ],
+  lib_source = ":all",
+  deps = [
+    "@freetype2//:library",
+    "@fribidi//:library",
+    "@fontconfig//:library",
+  ],
+  static_libraries = [
+    "libass.a",
+  ],
+  make_commands = [
+    "##define_absolute_paths## $$EXT_BUILD_DEPS$$ $$EXT_BUILD_DEPS$$",
+    "make",
+    "make install",
+  ],
+  visibility = ["//visibility:public"],
+)
