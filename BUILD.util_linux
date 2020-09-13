@@ -10,10 +10,11 @@ configure_make(
   configure_options = [
     "--disable-all-programs",
     "--enable-libuuid",
+    "--disable-shared",
   ],
   lib_source = ":all",
-  shared_libraries = [
-    "libuuid.so",
+  static_libraries = [
+    "libuuid.a",
   ],
   visibility = ["//visibility:public"],
 )

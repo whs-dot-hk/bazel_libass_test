@@ -7,10 +7,13 @@ filegroup(
 
 cmake_external(
   name = "library",
+  cache_entries = {
+    "EXPAT_SHARED_LIBS": "OFF",
+  },
   lib_source = ":all",
   out_lib_dir = "lib64",
-  shared_libraries = [
-    "libexpat.so",
+  static_libraries = [
+    "libexpat.a",
   ],
   visibility = ["//visibility:public"],
 )
