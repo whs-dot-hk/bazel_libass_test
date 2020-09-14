@@ -8,8 +8,11 @@ filegroup(
 configure_make(
   name = "library",
   lib_source = ":all",
-  shared_libraries = [
-    "libfribidi.so",
+  configure_options = [
+     "--enable-shared=no",
+  ],
+  static_libraries = [
+    "libfribidi.a",
   ],
   visibility = ["//visibility:public"],
 )
