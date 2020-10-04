@@ -56,3 +56,10 @@ http_archive(
     strip_prefix = "libass-0.14.0",
     urls = ["https://github.com/libass/libass/releases/download/0.14.0/libass-0.14.0.tar.gz"],
 )
+
+http_archive(
+    name = "gperf",
+    build_file = "@//:BUILD.gperf",
+    strip_prefix = "gperf-3.1",
+    urls = ["https://ftp.gnu.org/pub/gnu/gperf/gperf-3.1.tar.gz"],
+)
